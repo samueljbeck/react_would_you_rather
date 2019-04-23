@@ -15,5 +15,5 @@ I look forward to receiving feedback.
 
 To get started:
 
-* install all project dependencies with `npm install`
-* start the development server with `npm start`
+* install all project dependencies with `yarn install`
+* start the development server with `yarn start`
