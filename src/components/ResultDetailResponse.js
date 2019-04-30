@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { dispatch } from 'rxjs/internal/observable/range'; 
 import { handleSaveAnswer } from '../actions/questions';
 
 class ResultDetailResponse extends Component {
@@ -83,8 +82,12 @@ function mapStateToProps({ authedUser, users, questions }, id) {
   };
 }
 
-const mapDispatchToProps =  {
-  handleSaveAnswer,
+function mapDispatchToProps(dispatch) {
+  return {
+    handleSaveAnswer: (answer) => {
+      return dispatch(handleSaveAnswer(answer));
+    }
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ResultDetailResponse);

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { handleLogin } from '../actions/authedUser';
+
 
 class Nav extends Component {
   constructor() {
@@ -17,6 +18,10 @@ class Nav extends Component {
   toggleLogout(e) {
     e.preventDefault();
     this.state.logoutVisible ? this.props.dispatch(handleLogin(null)) : this.setState({ logoutVisible: true });
+    console.log(e)
+    if (this.state.logoutVisible) {
+      this.props.history.push('/')
+    }
   }
 
   render() {
@@ -41,11 +46,11 @@ class Nav extends Component {
           </li>
         </ul>
         {this.state.logoutVisible ? (
-          <div className="nav-authuser flex-row" onClick={this.toggleLogout}>
+          <div name="logout" className="nav-authuser flex-row" onClick={this.toggleLogout}>
             <div className="margin-top-bottom-auto">Logout</div>
           </div>
         ) : (
-          <div className="nav-authuser flex-row" onClick={this.toggleLogout}>
+          <div name="user" className="nav-authuser flex-row" onClick={this.toggleLogout}>
             <img src={user ? user.avatarURL : ''} alt={`Avatar of ${user ? user.name : ''}`} className="avatar-small" />
             <div className="margin-top-bottom-auto">{user ? user.name : ''}</div>
           </div>
@@ -62,4 +67,4 @@ function mapStateToProps({ authedUser, users }) {
   };
 }
 
-export default connect(mapStateToProps)(Nav);
+export default withRouter(connect(mapStateToProps)(Nav));
