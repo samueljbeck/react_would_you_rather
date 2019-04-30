@@ -20,14 +20,14 @@ export default function users(state = {}, action) {
       };
 
     case SAVE_ANSWER_TO_USER:
-      console.log(action);
       const authedUser = action.answer.authedUser;
       const option = action.answer.option;
+      const qid = action.answer.qid;
       return {
         ...state,
         [authedUser]: {
           ...state[authedUser],
-          answers: Object.assign(state[authedUser].answers, { authedUser, option }),
+          answers: Object.assign(state[authedUser].answers, { [qid]: option }),
         },
       };
 

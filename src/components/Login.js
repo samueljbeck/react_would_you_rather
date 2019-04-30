@@ -16,7 +16,9 @@ class Login extends Component {
 
   toggleLogins(event) {
     event.preventDefault();
-    this.setState({ showLogins: !this.state.showLogins });
+    this.setState((state) => ({
+      showLogins: !state.showLogins
+    }))
   }
 
   selectLogin(id, event) {

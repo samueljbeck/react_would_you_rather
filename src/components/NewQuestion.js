@@ -14,19 +14,9 @@ class NewQuestion extends Component {
     };
   }
 
-  optionOneChange = e => {
-    const optionOne = e.target.value;
-    this.setState(() => ({
-      optionOne,
-    }));
-  };
-
-  optionTwoChange = e => {
-    const optionTwo = e.target.value;
-    this.setState(() => ({
-      optionTwo,
-    }));
-  };
+  handleOptionChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  }
 
   handleSubmit = event => {
     event.preventDefault();
@@ -60,7 +50,8 @@ class NewQuestion extends Component {
             <textarea
               placeholder="Enter Option One Text Here"
               value={optionOne}
-              onChange={this.optionOneChange}
+              name="optionOne"
+              onChange={this.handleOptionChange}
               maxLength={120}
             />
           </div>
@@ -69,7 +60,8 @@ class NewQuestion extends Component {
             <textarea
               placeholder="Enter Option Two Text Here"
               value={optionTwo}
-              onChange={this.optionTwoChange}
+              name="optionTwo"
+              onChange={this.handleOptionChange}
               maxLength={120}
             />
           </div>

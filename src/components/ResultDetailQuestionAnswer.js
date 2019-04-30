@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import selected from '../selected.svg';
 
-class ResultDetailQuestionAnswer extends Component {
-  render() {
-    const option = this.props.option;
+const ResultDetailQuestionAnswer = ({authedUser, option}) => {
     const optionIndicator = { width: (option.votes.length / option.totalVotes) * 100 + '%' };
 
     return (
         <div className=" question-option-holder">
-            {option.votes.includes(this.props.authedUser) ? (
+            {option.votes.includes(authedUser) ? (
                 <img src={selected} className="selected" alt="selected" />
             ) : (
                 ''
@@ -24,8 +22,7 @@ class ResultDetailQuestionAnswer extends Component {
                 {option.votes.length} of {option.totalVotes}
             </div>
         </div>
-    );
-  }
+    )
 }
 
 function mapStateToProps({ authedUser }, option) {

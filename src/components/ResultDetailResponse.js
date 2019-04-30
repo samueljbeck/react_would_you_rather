@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { dispatch } from 'rxjs/internal/observable/range'; 
 import { handleSaveAnswer } from '../actions/questions';
 
 class ResultDetailResponse extends Component {
@@ -15,10 +16,10 @@ class ResultDetailResponse extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    const { dispatch, authedUser, question } = this.props;
-    const id = question.id;
+    const { authedUser, question } = this.props;
+    const qid = question.id;
     const { option } = this.state;
-    dispatch(handleSaveAnswer({ authedUser: authedUser, qid: id, option: option }));
+    this.props.handleSaveAnswer({authedUser, qid, option});
   };
 
   handleOptionSelection(option, event) {
@@ -82,4 +83,8 @@ function mapStateToProps({ authedUser, users, questions }, id) {
   };
 }
 
-export default connect(mapStateToProps)(ResultDetailResponse);
+const mapDispatchToProps =  {
+  handleSaveAnswer,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ResultDetailResponse);
